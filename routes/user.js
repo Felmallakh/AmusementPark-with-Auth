@@ -39,6 +39,7 @@ const userValidators = [
               }
             });
         }),
+
     check('password')
         .exists({ checkFalsy: true })
         .withMessage('Please provide a value for Password')
@@ -66,6 +67,7 @@ router.post('/user/register', csrfProtection, userValidators, asyncHandler( asyn
     const validatorErrors = validationResult(req);
 
     if(validatorErrors.isEmpty()) {
+        console.log("succeeeeees")
         const hashedPassword = await bcrypt.hash(password, 10);
         user.hashedPassword = hashedPassword;
         await user.save();
@@ -73,6 +75,7 @@ router.post('/user/register', csrfProtection, userValidators, asyncHandler( asyn
         res.redirect('/')
     } else {
         const errors = validatorErrors.array().map((error) => error.msg);
+        console.log(errors)
         res.render("user-register", {
           title: "Register",
           csrfToken: req.csrfToken(),
@@ -81,6 +84,8 @@ router.post('/user/register', csrfProtection, userValidators, asyncHandler( asyn
         });
     }
 }));
+
+//ABCabc123123@
 
 router.get("/user/login", csrfProtection, (req, res) => {
     res.render("user-login", {

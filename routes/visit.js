@@ -11,7 +11,8 @@ const visitValidators = [
   check("visitedOn")
     .exists({ checkFalsy: true })
     .withMessage("Please provide a value for Visited On")
-    .matches(/^(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/(0[1-9]|1[1-9]|2[1-9])$/, 'g')
+    // .isDate({ format: "yyyy-MM-DD"})
+    .matches(/^(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/(0[1-9]|1[1-9]|2[1-9])$/)
     .withMessage("Please provide a valid date"),
   check("rating")
     .isInt({ min: 1, max: 5 })
@@ -39,7 +40,7 @@ router.post('/attraction/:attractionId(\\d+)/visit/add', requireAuth, csrfProtec
         comments
     });
 
-    const validatorErrors = validationResult(req); 
+    const validatorErrors = validationResult(req);
 
     if (validatorErrors.isEmpty()) {
       await visit.save();

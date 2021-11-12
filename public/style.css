@@ -1,6 +1,7 @@
 .right-buttons{
 display: flex;
-justify-content: space-around;
+justify-content: align-right;
 align-items: center;
 width: 12rem;
+color: blue;
 }

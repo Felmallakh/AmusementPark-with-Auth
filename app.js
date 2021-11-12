@@ -1,5 +1,6 @@
 
 const express = require('express');
+const path = require('path');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const session = require("express-session");
@@ -18,6 +19,7 @@ const app = express();
 app.set('view engine', 'pug');
 app.use(morgan('dev'));
 app.use(cookieParser(sessionSecret));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
   // name: 'amusement-park-tracker.sid',
   secret: sessionSecret,
@@ -35,6 +37,7 @@ app.use(visitRoutes);
 // Catch unhandled requests and forward to error handler.
 app.use((req, res, next) => {
   const err = new Error('The requested page couldn\'t be found.');
+  console.log(req.path)
   err.status = 404;
   next(err);
 });
