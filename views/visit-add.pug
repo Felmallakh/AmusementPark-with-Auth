@@ -1,0 +1,10 @@
+extends layout.pug
+
+include utils.pug
+
+block content
+  form(action=`/attraction/${attraction.id}/visit/add` method='post')
+    input(type='hidden' name='_csrf' value=csrfToken)
+    +field('Visited On', 'visitedOn', visit.visitedOn, 'text', 'example: 01-31-2021')
+    +field('Rating', 'rating', visit.rating)
+    +field('Comments', 'comments', visit.comments, 'textarea')
