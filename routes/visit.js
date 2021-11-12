@@ -39,7 +39,7 @@ router.post('/attraction/:attractionId(\\d+)/visit/add', requireAuth, csrfProtec
         comments
     });
 
-    const validatorErrors = validationResult(req);
+    const validatorErrors = validationResult(req); 
 
     if (validatorErrors.isEmpty()) {
       await visit.save();
