@@ -62,7 +62,7 @@ const userValidators = [
 
 router.post('/user/register', csrfProtection, userValidators, asyncHandler( async (req, res) => {
     const { firstName, lastName, emailAddress, password } = req.body;
-    const user = db.User.build({ firstName, lastName, emailAddress, password });
+    const user = db.User.build({ firstName, lastName, emailAddress });
 
     const validatorErrors = validationResult(req);
 
