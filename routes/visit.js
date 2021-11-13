@@ -11,8 +11,10 @@ const visitValidators = [
   check("visitedOn")
     .exists({ checkFalsy: true })
     .withMessage("Please provide a value for Visited On")
-    // .isDate({ format: "yyyy-MM-DD"})
-    .matches(/^(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/(0[1-9]|1[1-9]|2[1-9])$/)
+    // .isDate({ format: "yyyy-MM-DD"})   OR .isISO8601
+    .matches(
+      /^(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/(0[1-9]|1[1-9]|2[1-9])$/
+    )
     .withMessage("Please provide a valid date"),
   check("rating")
     .isInt({ min: 1, max: 5 })

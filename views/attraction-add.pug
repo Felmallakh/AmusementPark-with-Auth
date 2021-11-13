@@ -8,5 +8,5 @@ block content
   form(action=`/park/${park.id}/attraction/add` method='post')
     include attraction-form-fields.pug
     div(class='py-4')
-      button(type='submit' class='btn btn-primary') Add Attraction
+      button(type='submit' class='btn btn-primary' href=`/park/${park.id}/attraction/add`) Add Attraction
       a(href=`/park/${park.id}` class='btn btn-warning ml-2') Cancel

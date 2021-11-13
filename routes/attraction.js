@@ -26,7 +26,7 @@ const attractionValidators = [
     .withMessage('Theme must not be more than 100 characters long'),
   check('opened')
     .exists({ checkFalsy: true })
-    .withMessage('Please provide a value for Opened')
+    .withMessage('Please provide a value for Opened Date')
     .isISO8601()
     .withMessage('Please provide a valid date for Opened'),
   check('ridersPerVehicle')
