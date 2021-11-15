@@ -2,6 +2,9 @@
 const express = require('express');
 const path = require('path');
 const morgan = require('morgan');
+
+// We use the express-session library in order to set up session middleware
+const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const session = require("express-session");
 const { restoreUser } = require("./auth")
@@ -18,16 +21,23 @@ const app = express();
 
 app.set('view engine', 'pug');
 app.use(morgan('dev'));
-app.use(cookieParser(sessionSecret));
 app.use(express.static(path.join(__dirname, 'public')));
+
+// We pass in the same secret to our cookieParser as we do to our session middleware
+app.use(cookieParser(sessionSecret));
+
+// Our session middleware sets up a name in order to easily identify the cookie that it creates
 app.use(session({
-  name: 'amusement-park-tracker.sid', 
+  name: 'amusement-park-tracker.sid',
   secret: sessionSecret,
   resave: false,
   saveUninitialized: false,
 }));
 app.use(express.urlencoded({ extended: false }));
+
+// We use our restoreUser middleware (defined in our auth file below) in order to add the whole user instance to our response's locals key, as well as a flag to indicate we have been authenticated. We can use these values in subsequent routes or middleware functions in order to restrict access, provide customized information, etc.
 app.use(restoreUser)
+
 app.use(indexRoutes);
 app.use(parkRoutes);
 app.use(attractionRoutes);
