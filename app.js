@@ -32,6 +32,12 @@ app.use(session({
   secret: sessionSecret,
   resave: false,
   saveUninitialized: false,
+  cookie: {
+			httpOnly: true,
+			maxAge: 60000,
+			path: '/',
+			secure: true
+  }
 }));
 app.use(express.urlencoded({ extended: false }));
 
