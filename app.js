@@ -21,7 +21,7 @@ app.use(morgan('dev'));
 app.use(cookieParser(sessionSecret));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
-  name: 'amusement-park-tracker.sid',
+  name: 'amusement-park-tracker.sid', 
   secret: sessionSecret,
   resave: false,
   saveUninitialized: false,
